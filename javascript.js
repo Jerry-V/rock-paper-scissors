@@ -54,7 +54,6 @@ function returnMessage(roundResult, playerSelection, computerSelection){
 }
 
 // function play 5 rounds, report each round, keep score, report best of 5 winner
-
 // loop process 5 times
 //  for each loop:
 //      ask input, generate computer choice
@@ -80,7 +79,9 @@ function game(){
     }
     
     if (score >= 3){
-        
+        console.log(`You Win with ${score} out of 5`);
+    } else {
+        console.log(`You Lose with ${score} out of 5`);
     }
 }
 
