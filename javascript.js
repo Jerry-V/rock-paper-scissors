@@ -94,9 +94,14 @@ function game2(){
     let roundResult;
     let youScore=0;
     let compScore=0;
+    let roundResultText='';
     
-    const outputBox = document.querySelector('#resultsBox');
-    resultsBox.textContent = 'Results';
+    const resultsBox = document.querySelector('#resultsBox');
+    resultsBox.textContent = 'Results Location';
+    
+    const winnerBox = document.querySelector('#winnerBox');
+    winnerBox.textContent = 'Winner: None'
+    
     let winner='None';
     
     // Attaching listeners to groups of nodes
@@ -110,12 +115,14 @@ function game2(){
             roundResult = playRound(userChoice,compChoice);
             console.log(`${userChoice}, ${compChoice}, ${roundResult}`);
             
+            // Increments score
             if (roundResult===1){
                 youScore++;
             } else if (roundResult===2){
                 compScore++;
             }
             
+            // First to 5 wins
             if (youScore===5){
                 winner='You';
                 youScore=0;
@@ -126,10 +133,25 @@ function game2(){
                 compScore=0;   
             }
             
-            resultsBox.textContent = `First to 5 wins: You: ${userChoice}, ${youScore}
-            , Computer: ${compChoice}, ${compScore}
-            , Result: ${roundResult}, Winner: ${winner}`;
+            // Output text for who wins
+            if (roundResult === 0){
+                roundResultText='Tie';
+            } else if (roundResult ===1){
+                roundResultText='Win';
+            } else if (roundResult===2){
+                roundResultText='Lose';
+            } else {
+                roundResultText='Error';
+            }
             
+            // Change HTML text according to round results
+            resultsBox.textContent = `Results
+            : Your choice: ${youScore} ${userChoice}
+            , Comp choice: ${compScore} ${compChoice} 
+            , Round result: ${roundResultText}`;
+            winnerBox.textContent = `Winner: ${winner}`;
+            
+            // Reset scores after someone wins
             if (youScore < 5 && compScore < 5) {
                 winner='None';
             }
