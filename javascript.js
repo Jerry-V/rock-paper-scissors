@@ -39,7 +39,7 @@ function playRound (playerSelection, computerSelection) {
 // function returns message appropriate to round results
     // compare user choice to computer choice
     // if they tie return tie message
-    // if they win return vicotory message
+    // if they win return victory message
     // if they lose return defeat message
 function returnMessage(roundResult, playerSelection, computerSelection){
         if (roundResult === 0){
@@ -52,6 +52,7 @@ function returnMessage(roundResult, playerSelection, computerSelection){
             console.log(`Something went wrong`);
         }
 }
+
 
 // function play 5 rounds, report each round, keep score, report best of 5 winner
 // loop process 5 times
@@ -68,6 +69,7 @@ function game(){
     let roundResult;
     let score=0;
     
+
     for (let i=0; i<5; i++){
         userChoice = prompt('Enter either Rock, Paper, or Scissors.');
         compChoice = computerPlay();
@@ -77,7 +79,8 @@ function game(){
             score++;
         }
     }
-    
+
+   
     if (score >= 3){
         console.log(`You Win with ${score} out of 5`);
     } else {
@@ -85,3 +88,51 @@ function game(){
     }
 }
 
+function game2(){
+    let userChoice;
+    let compChoice;
+    let roundResult;
+    let youScore=0;
+    let compScore=0;
+    
+    const outputBox = document.querySelector('#resultsBox');
+    resultsBox.textContent = 'Results';
+    let winner='None';
+    
+    // Attaching listeners to groups of nodes
+    // https://www.theodinproject.com/lessons/foundations-dom-manipulation-and-events#events
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            //alert(button.id);
+            userChoice = button.id;
+            compChoice = computerPlay();
+            roundResult = playRound(userChoice,compChoice);
+            console.log(`${userChoice}, ${compChoice}, ${roundResult}`);
+            
+            if (roundResult===1){
+                youScore++;
+            } else if (roundResult===2){
+                compScore++;
+            }
+            
+            if (youScore===5){
+                winner='You';
+                youScore=0;
+                compScore=0;
+            } else if (compScore===5){
+                winner='Computer';
+                youScore=0;
+                compScore=0;   
+            }
+            
+            resultsBox.textContent = `First to 5 wins: You: ${userChoice}, ${youScore}
+            , Computer: ${compChoice}, ${compScore}
+            , Result: ${roundResult}, Winner: ${winner}`;
+            
+            if (youScore < 5 && compScore < 5) {
+                winner='None';
+            }
+        })
+    })
+}
