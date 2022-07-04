@@ -62,6 +62,8 @@ function returnMessage(roundResult, playerSelection, computerSelection){
 //      update score
 //      display round result
 //  at end report overall winner from score value
+
+// Older game function
 function game(){
     
     let userChoice;
@@ -88,6 +90,7 @@ function game(){
     }
 }
 
+// Newer game function
 function game2(){
     let userChoice;
     let compChoice;
@@ -97,7 +100,7 @@ function game2(){
     let roundResultText='';
     
     const resultsBox = document.querySelector('#resultsBox');
-    resultsBox.textContent = 'Results Location';
+    resultsBox.textContent = 'Results: None (first to 5 wins)';
     
     const winnerBox = document.querySelector('#winnerBox');
     winnerBox.textContent = 'Winner: None'
@@ -145,10 +148,10 @@ function game2(){
             }
             
             // Change HTML text according to round results
-            resultsBox.textContent = `Results
-            : Your choice: ${youScore} ${userChoice}
-            , Comp choice: ${compScore} ${compChoice} 
-            , Round result: ${roundResultText}`;
+            resultsBox.textContent = `Results:
+            You: ${youScore} ${userChoice} |
+            Computer: ${compScore} ${compChoice} | 
+            Round result: ${roundResultText}`;
             winnerBox.textContent = `Winner: ${winner}`;
             
             // Reset scores after someone wins
